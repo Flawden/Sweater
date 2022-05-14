@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User list</title>
+</head>
+<body>
+
+<th:block th:each="user: ${users}">
+    <div th:text="*{user.getUsername()}">111</div>
+</th:block>
+
+<form th:method="POST" th:action="@{admin/user/user_filter}" th:object="${message}">
+    <input type="text" name="filter">
+    <button type="submit">Find</button>
+</form>
+
+<br>
+<a href="/">Home page</a>
+</body>
+</html>

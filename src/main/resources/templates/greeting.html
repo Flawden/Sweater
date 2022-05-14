@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting</title>
+</head>
+<body>
+    <p th:text="'Hello, ' + ${name} + '!'"/>
+    <a href="/messages">Add new message</a>
+    <br><br>
+    <a href="/messages/messagesList">Go to messagesList</a>
+    <br><br>
+    <a href="/registration">Sing up</a>
+    <br><br>
+    <a href="/login">Sing in</a>
+    <br><br>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+</body>
+</html>

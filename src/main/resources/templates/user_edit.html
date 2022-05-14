@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User edit</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}" th:object="${user}">
+    <h3 class="text-center">Edit user:</h3>
+    <div class="form-group">
+        <input class="form-control item" type="text" th:field="*{username}"  required>
+    </div>
+    <div class="form-group">
+        <input class="form-control item" type="text" th:field="*{password}" required>
+    </div>
+
+    <th:block th:each="role: ${roles}">
+        <span th:if="${user.getRoles().contains(role)}">
+            <label for="active" th:text="${role}">Bla?</label>
+            <input class="form-control item" type="checkbox" th:value="${role}" th:name="userRoles" id="active" checked>
+        </span>
+        <span th:if="${!user.getRoles().contains(role)}">
+            <label for="active" th:text="${role}">Bla?</label>
+            <input class="form-control item" type="checkbox" th:value="${role}" th:name="userRoles" id="active">
+        </span>
+        <br>
+    </th:block>
+
+    <div class="form-group">
+        <button class="btn btn-primary btn-block create-account" type="submit">UPDATE</button>
+    </div>
+</form>
+</body>
+</html>

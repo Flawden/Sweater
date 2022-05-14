@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+</head>
+<body>
+
+<th:block th:each="message: ${messages}">
+    <div>Text: <span th:text="*{message.text}">111</span></div>
+    <div>Tag: <span th:text="*{message.tag}">111</span></div>
+    <div>Author: <span th:text="*{message.author.username}">111</span></div>
+    <div>File: <span th:text="*{message.filename}"></span></div>
+    <br>
+</th:block>
+
+<form th:method="POST" th:action="@{/filter}" th:object="${message}">
+    <input type="text" name="filter">
+    <button type="submit">Find</button>
+</form>
+
+<br>
+<a href="/">Home page</a>
+</body>
+</html>

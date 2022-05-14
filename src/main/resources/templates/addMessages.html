@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="POST" enctype="multipart/form-data" th:action="@{/messages}" th:object="${message}">
+    <ul>
+        <li>
+            <label for="text">Message:</label>
+            <textarea type="text" id="text" name="message_text" th:field="*{text}"></textarea>
+        </li>
+        <li>
+            <label for="tag">Tag:</label>
+            <input id="tag" name="user_tag" th:field="*{tag}"/>
+        </li>
+        <li>
+            <label for="file">File:</label>
+            <input type="file" id="file" name="file"/>
+        </li>
+        <button type="submit">Send your message</button>
+    </ul>
+</form>
+</body>
+</html>
