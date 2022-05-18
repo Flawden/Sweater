@@ -48,8 +48,8 @@ public class MessagesController {
             @RequestParam("file") MultipartFile file) {
 
 
-        if (file != null) {
-
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            System.out.println("Test file: " + file.getOriginalFilename() + "!");
 
             File uploadDirMain = new File(uploadPath + "/");
             File uploadDir = new File(uploadPath + "/" + user.getUsername());
@@ -102,6 +102,9 @@ public class MessagesController {
             model.addAttribute("name", principal.getName());
         }
         List<Message> messages = messageRepository.findAll();
+        for (Message message: messages) {
+            System.out.println(message);
+        }
         model.addAttribute("messages", messages);
         return "message_list";
     }

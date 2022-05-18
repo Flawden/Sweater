@@ -24,7 +24,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
+                            Authorization
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/login">Sign in</a></li>
@@ -46,7 +46,7 @@
     <div>Text: <span th:text="*{message.text}">111</span></div>
     <div>Tag: <span th:text="*{message.tag}">111</span></div>
     <div>Author: <span th:text="*{message.author.username}">111</span></div>
-    <div th:if="message.filename != null">File: <img th:src="@{/img/{username}/{filename}(filename=${message.filename}, username=${message.author.username})}"></img></div>
+    <div th:if="${message.filename != null}">File: <img th:src="@{/img/{username}/{filename}(filename=${message.filename}, username=${message.author.username})}"></img></div>
     <br>
 </th:block>
 
