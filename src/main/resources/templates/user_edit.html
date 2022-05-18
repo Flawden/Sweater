@@ -7,6 +7,42 @@
 </head>
 <body>
 <div class="container">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Sweater</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/messages/messagesList">Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/messages">New message</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/login">Sign in</a></li>
+                            <li><a class="dropdown-item" href="/registration">Sign up</a></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post">
+                                    <input type="submit" value="Sign Out"/>
+                                </form>
+                            </li>
+                        </ul>
+                        <div th:if="Session.SPRING_SECURITY_CONTEXT != null" class="navbar-text" th:text="${name}"></div>
+                    </li>
+                </ul>
+                <div th:if="Session.SPRING_SECURITY_CONTEXT != null" class="navbar-text" th:text="${name}"></div>
+            </div>
+        </div>
+    </nav>
+
 <form th:method="PATCH" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}" th:object="${user}">
     <h3 class="text-center">Edit user:</h3>
     <div class="form-group">
@@ -19,17 +55,17 @@
     <th:block th:each="role: ${roles}">
         <span th:if="${user.getRoles().contains(role)}">
             <label for="active" th:text="${role}">Bla?</label>
-            <input class="form-control item" type="checkbox" th:value="${role}" th:name="userRoles" id="active" checked>
+            <input class="form item" type="checkbox" th:value="${role}" th:name="userRoles" id="active" checked>
         </span>
         <span th:if="${!user.getRoles().contains(role)}">
             <label for="active" th:text="${role}">Bla?</label>
-            <input class="form-control item" type="checkbox" th:value="${role}" th:name="userRoles" id="active">
+            <input class="form item" type="checkbox" th:value="${role}" th:name="userRoles" id="active">
         </span>
         <br>
     </th:block>
 
     <div class="form-group">
-        <button class="btn btn-primary btn-block create-account" type="submit">UPDATE</button>
+        <button class="btn btn-primary" type="submit">UPDATE</button>
     </div>
 </form>
 </div>

@@ -18,12 +18,10 @@ public class GreetingController {
     
     @GetMapping("/")
     public String greeting(Principal principal, Model model) {
-        if (principal == null) {
-            model.addAttribute("name", "World");
-        }
-        else {
+        if(principal != null) {
             model.addAttribute("name", principal.getName());
         }
+
         return "greeting";
     }
 

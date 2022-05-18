@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,8 +33,11 @@ public class MessagesController {
     }
 
     @GetMapping("")
-    public String messages(@ModelAttribute("message") Message message, Model model) {
+    public String messages(@ModelAttribute("message") Message message, Model model, Principal principal) {
         model.addAttribute("file");
+        if(principal != null) {
+            model.addAttribute("name", principal.getName());
+        }
         return "addMessages";
     }
 
@@ -93,7 +97,10 @@ public class MessagesController {
     }
 
     @GetMapping("/messagesList")
-    public String messages(Model model) {
+    public String messages(Model model, Principal principal) {
+        if(principal != null) {
+            model.addAttribute("name", principal.getName());
+        }
         List<Message> messages = messageRepository.findAll();
         model.addAttribute("messages", messages);
         return "message_list";

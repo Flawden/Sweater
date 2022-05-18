@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -25,16 +26,22 @@ public class AdminController {
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public String userList(Model model) {
+    public String userList(Model model, Principal principal) {
         model.addAttribute("users", userRepository.findAll());
+        if(principal != null) {
+            model.addAttribute("name", principal.getName());
+        }
 
         return "user_list";
     }
 
     @GetMapping("users/{user}")
-    public String userEditForm(@PathVariable User user, Model model) {
+    public String userEditForm(@PathVariable User user, Model model, Principal principal) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
+        if(principal != null) {
+            model.addAttribute("name", principal.getName());
+        }
         for(Role role: Role.values()) {
             System.out.println(role);
             if (user.getRoles().contains(role)) {

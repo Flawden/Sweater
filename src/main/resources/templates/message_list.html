@@ -7,21 +7,53 @@
 </head>
 <body>
 <div class="container">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Sweater</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/messages/messagesList">Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/messages">New message</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/login">Sign in</a></li>
+                            <li><a class="dropdown-item" href="/registration">Sign up</a></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post">
+                                    <input type="submit" value="Sign Out"/>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div th:if="Session.SPRING_SECURITY_CONTEXT != null" class="navbar-text" th:text="${name}"></div>
+            </div>
+        </div>
+    </nav>
+
 <th:block th:each="message: ${messages}">
     <div>Text: <span th:text="*{message.text}">111</span></div>
     <div>Tag: <span th:text="*{message.tag}">111</span></div>
     <div>Author: <span th:text="*{message.author.username}">111</span></div>
-    <div>File: <img th:src="@{/img/{username}/{filename}(filename=${message.filename}, username=${message.author.username})}"></img></div>
+    <div th:if="message.filename != null">File: <img th:src="@{/img/{username}/{filename}(filename=${message.filename}, username=${message.author.username})}"></img></div>
     <br>
 </th:block>
 
-<form th:method="POST" th:action="@{/filter}" th:object="${message}">
+<form th:method="POST" th:action="@{/messages/filter}" th:object="${message}">
     <input type="text" name="filter">
-    <button type="submit">Find</button>
+    <button type="submit" class="btn btn-primary">Find</button>
 </form>
-
-<br>
-<a href="/">Home page</a>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 </div>
