@@ -3,6 +3,7 @@ package ca.flawden.Sweater.controller;
 import ca.flawden.Sweater.entity.Message;
 import ca.flawden.Sweater.entity.User;
 import ca.flawden.Sweater.repos.MessageRepository;
+import ca.flawden.Sweater.util.Converter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,14 @@ import java.util.UUID;
 public class MessagesController {
 
     private MessageRepository messageRepository;
+    private Converter converter;
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    public MessagesController(MessageRepository messageRepository) {
+    public MessagesController(MessageRepository messageRepository, Converter converter) {
         this.messageRepository = messageRepository;
+        this.converter = converter;
     }
 
     @GetMapping("")
@@ -40,11 +43,17 @@ public class MessagesController {
             @ModelAttribute("message") Message message,
             @RequestParam("file") MultipartFile file) {
 
-        System.out.println(file.getOriginalFilename());
 
         if (file != null) {
+
+
+            File uploadDirMain = new File(uploadPath + "/");
             File uploadDir = new File(uploadPath + "/" + user.getUsername());
             System.out.println(uploadDir.getAbsolutePath());
+            if(!uploadDirMain.exists()) {
+                boolean a = uploadDirMain.mkdir();
+                System.out.println(a);
+            }
             if(!uploadDir.exists()) {
                 boolean a = uploadDir.mkdir();
                 System.out.println(a);
@@ -52,6 +61,8 @@ public class MessagesController {
             System.out.println(uploadDir.getAbsolutePath());
             String uuidFile = UUID.randomUUID().toString();
             String filename = uuidFile + "_" + file.getOriginalFilename();
+
+            filename = converter.convert(filename);
 
             try {
                 file.transferTo(new File(uploadPath + "/" + user.getUsername() + "/" + filename));

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Messages</title>
 </head>
 <body>
@@ -10,7 +11,7 @@
     <div>Text: <span th:text="*{message.text}">111</span></div>
     <div>Tag: <span th:text="*{message.tag}">111</span></div>
     <div>Author: <span th:text="*{message.author.username}">111</span></div>
-    <div>File: <span th:text="*{message.filename}"></span></div>
+    <div>File: <img th:src="@{/img/{username}/{filename}(filename=${message.filename}, username=${message.author.username})}"></img></div>
     <br>
 </th:block>
 
@@ -21,5 +22,6 @@
 
 <br>
 <a href="/">Home page</a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
