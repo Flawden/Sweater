@@ -23,6 +23,9 @@ public class User implements UserDetails {
     @Column(name = "active")
     private Boolean active;
 
+    @Column(name = "activation_code")
+    private String activationCode;
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
@@ -45,6 +48,12 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String getActivationCode() {
+        return activationCode;
+    }
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
     public String getPassword() {
         return password;
     }
@@ -66,20 +75,22 @@ public class User implements UserDetails {
 
     public User() {
     }
-    public User(Long id, String username, String email, String password, Boolean active, Set<Role> roles) {
+    public User(Long id, String username, String email, String password, Boolean active, String activationCode, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.active = active;
+        this.activationCode = activationCode;
         this.roles = roles;
     }
 
-    public User(String username, String email, String password, Boolean active, Set<Role> roles) {
+    public User(String username, String email, String password, Boolean active, String activationCode, Set<Role> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.active = active;
+        this.activationCode = activationCode;
         this.roles = roles;
     }
 
