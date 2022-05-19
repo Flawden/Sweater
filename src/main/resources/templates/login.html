@@ -50,8 +50,8 @@
 </div>
 <form th:action="@{/login}" method="post">
   <div><h2>Login</h2></div>
-  <div><label> User Name : <input type="text" name="username"/> </label></div>
-  <div><label> Password: <input type="password" name="password"/> </label></div>
+  <div><label> User Name : <input type="text" name="username" required/> </label></div>
+  <div><label> Password: <input type="password" name="password" minlength="3" required/> </label></div>
   <div><input type="submit" value="Sign In" class="btn btn-primary"/></div>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>

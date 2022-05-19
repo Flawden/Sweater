@@ -44,8 +44,9 @@
 
 <form th:action="@{/registration}" method="post">
   <div><h2>Registration</h2></div>
-  <div><label> User Name : <input type="text" name="username"/> </label></div>
-  <div><label> Password: <input type="password" name="password"/> </label></div>
+  <div><label> Email : <input type="email" name="email" placeholder="some@some.ca" required/> </label></div>
+  <div><label> User Name : <input type="text" name="username" placeholder="username" minlength="3" required/> </label></div>
+  <div><label> Password: <input type="password" name="password" placeholder="*******" required/> </label></div>
   <div><input type="submit" value="Sign Up" class="btn btn-primary"/></div>
   <p th:text="${message}"></p>
 </form>
