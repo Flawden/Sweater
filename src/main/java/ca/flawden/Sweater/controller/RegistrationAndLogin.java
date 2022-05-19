@@ -1,23 +1,24 @@
 package ca.flawden.Sweater.controller;
 
-import ca.flawden.Sweater.entity.Role;
 import ca.flawden.Sweater.entity.User;
 import ca.flawden.Sweater.repos.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import ca.flawden.Sweater.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 @Controller
 public class RegistrationAndLogin {
 
-    @Autowired
     private UserRepository userRepository;
+    private UserService userService;
+
+    private RegistrationAndLogin(UserRepository userRepository, UserService userService) {
+
+        this.userRepository = userRepository;
+        this.userService = userService;
+    }
 
     @GetMapping("/registration")
     public String registration() {
@@ -26,17 +27,12 @@ public class RegistrationAndLogin {
 
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
-        User userFromDb = userRepository.findByUsername(user.getUsername());
-
-        if (userFromDb != null) {
+        if(userService.addUser(user)) {
+            return "redirect:/login";
+        } else {
             model.addAttribute("message", "User is already exist");
             return "registration";
         }
-
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        userRepository.save(user);
-        return "redirect:/login";
     }
 
 }
