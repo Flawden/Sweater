@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 
-    <nav th:insert="~{fragments/nav :: navigator}"></nav>
+    <nav th:replace="~{fragments/nav :: navigator}"></nav>
 
 <th:block th:each="user: ${users}">
     <div th:text="*{user.getUsername()}">111</div>

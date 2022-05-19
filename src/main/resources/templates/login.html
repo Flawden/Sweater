@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 
-  <nav th:insert="~{fragments/nav :: navigator}"></nav>
+  <nav th:replace="~{fragments/nav :: navigator}"></nav>
 
 <div th:if="${param.error}">
   Invalid username and password.

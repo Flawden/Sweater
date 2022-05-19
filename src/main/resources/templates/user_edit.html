@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 
-    <nav th:insert="~{fragments/nav :: navigator}"></nav>
+    <nav th:replace="~{fragments/nav :: navigator}"></nav>
 
 <form th:method="PATCH" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}" th:object="${user}">
     <h3 class="text-center">Edit user:</h3>
