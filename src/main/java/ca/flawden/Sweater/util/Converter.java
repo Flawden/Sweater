@@ -14,7 +14,10 @@ public class Converter {
         char[] charFileName = filename.toLowerCase().toCharArray();
 
         for(int i=0;i<filename.length();i++) {
-            System.out.println(i);
+            if (charFileName[i] == ' ') {
+                charFileName[i] = '_';
+                continue;
+            }
             for(int j=0; j<english.length;j++) {
                 if(charFileName[i] == russian[j]) {
                     charFileName[i] = english[j];
